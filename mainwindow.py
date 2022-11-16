@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from led_controller import *
+from led_controller import led_controller
 import sys
 
 
@@ -22,7 +22,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(538, 442)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.red = QtWidgets.QRadioButton(self.centralwidget, clicked = lambda: self.controller.red() )
+        self.red = QtWidgets.QRadioButton(self.centralwidget,
+                                          clicked=lambda: self.controller.red()
+                                          )
         self.red.setGeometry(QtCore.QRect(200, 110, 113, 28))
         font = QtGui.QFont()
         font.setFamily("Serif")
@@ -30,7 +32,16 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.red.setFont(font)
         self.red.setObjectName("red")
-        self.green = QtWidgets.QRadioButton(self.centralwidget, clicked = lambda: self.controller.green() )
+        self.red.setStyleSheet("QRadioButton"
+                               "{"
+                               "background-color : red"
+                               "}"
+                               )
+
+        self.green = QtWidgets.QRadioButton(self.centralwidget,
+                                            clicked=lambda:
+                                                self.controller.green()
+                                            )
         self.green.setGeometry(QtCore.QRect(200, 170, 113, 28))
         font = QtGui.QFont()
         font.setFamily("Serif")
@@ -38,7 +49,15 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.green.setFont(font)
         self.green.setObjectName("green")
-        self.blue = QtWidgets.QRadioButton(self.centralwidget, clicked = lambda: self.controller.blue() )
+        self.green.setStyleSheet("QRadioButton"
+                                 "{"
+                                 "background-color : lightgreen"
+                                 "}"
+                                 )
+        self.blue = QtWidgets.QRadioButton(self.centralwidget,
+                                           clicked=lambda:
+                                               self.controller.blue()
+                                           )
         self.blue.setGeometry(QtCore.QRect(200, 230, 113, 28))
         font = QtGui.QFont()
         font.setFamily("Serif")
@@ -46,7 +65,14 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.blue.setFont(font)
         self.blue.setObjectName("blue")
-        self.exit = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.clean_exit() )
+        self.blue.setStyleSheet("QRadioButton"
+                                "{"
+                                "background-color : lightblue"
+                                "}"
+                                )
+        self.exit = QtWidgets.QPushButton(self.centralwidget,
+                                          clicked=lambda: self.clean_exit()
+                                          )
         self.exit.setGeometry(QtCore.QRect(180, 310, 131, 31))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -75,9 +101,6 @@ class Ui_MainWindow(object):
         self.blue.setText(_translate("MainWindow", "Blue"))
         self.exit.setText(_translate("MainWindow", "Exit"))
 
-
     def clean_exit(self):
-        self.controller.controller_exit()
+        self.controller.reset()
         sys.exit()
-
-
